@@ -1,4 +1,4 @@
-# 台大JavaScript ES6教學課程
+# 台大JavaScript ES6進階 教學課程
 ###### tags: `JavaScript` `NTU課程`
 指導老師：彭兆蔚(彭彭)老師
 ---
