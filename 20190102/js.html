@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript</title>
+</head>
+<body>
+    <script>
+        // function add(n1,n2){
+        //     return n1+n2;
+        // }
+
+        /*我有一個函式add 
+          有兩個參數：
+            n1:數字
+            n2:數字
+          回傳值
+            加法的結果：數字
+        let add = function(n1,n2) {
+            return n1+n2;
+        }
+        let result = add(3,4);
+        console.log(result);
+         */
+         /*
+            我有一個函式 add
+            接受三個參數
+                args:物件
+                    -n1:數字
+                    -n2:數字
+                delay:數字
+                callback:函式(用函式呼叫)
+            回傳值
+                加法的結果：數字
+         */
+        let add = function(args, delay, callback) {
+            window.setTimeout(function(){
+                callback(args.n1+args.n2);
+            },delay);
+
+            return true;
+        }
+        // 把資料從非同步的函式中帶出來
+            // 1.呼叫函式 2.Promise
+        add({
+            n1:3,
+            n2:4
+        },2000,function(result){ //匿名函式，直接寫在第3參數裡
+            console.log(result);
+        });
+        // 第3個參數可事先寫好，並帶入add
+        function next(result){
+            alert(result);
+        }
+        add({
+            n1:6,
+            n2:5
+        },3000,next
+        );
+        
+    </script>
+</body>
+</html>
