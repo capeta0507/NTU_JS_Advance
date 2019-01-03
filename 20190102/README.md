@@ -44,6 +44,7 @@ chart.draw(data, options);
 ```javascript=
 google.charts.setOnLoadCallback(drawChart);
 ```
+![](https://i.imgur.com/wpKu3NO.png)
 #### 第二種做法
 1. 建立一個空的 DataTable 物件
 ```javascript=
