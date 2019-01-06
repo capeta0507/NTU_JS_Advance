@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data Visulization</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(init);
+        function init(){
+            // 使用callback方式回傳
+            getData(function(data){
+                drawChart(data);
+            });
+            
+        }
+        function getData(callback){
+            /*
+                連線到特定的網址取得資料
+                fetch(網址).then(function(response){
+                    取得response物件
+                })
+                fetch 實作 Promise 物件來完成內部的網路連線操作
+            */
+            let src = "https://training.pada-x.com/resources/javascript-advanced/salary.out"
+            fetch(src).then(function(response){
+                return response.json(); //解讀 JSON 格式的資料成為物件和陣列
+            }).then(function(result){
+                callback(result);
+            })
+        }
+        function drawChart(data){
+            data = google.visualization.arrayToDataTable(data);
+            let options = {
+                title: 'Salary'
+            };
+
+            let chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <h3>資料視覺化</h3>
+    <div id="chart" style="width: 500px ; height: 400px;"></div>
+</body>
+</html>
