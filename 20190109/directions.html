@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Maps Directions</title>
+</head>
+<body>
+    <h3>Google Maps</h3>
+    <div id="map" style="width: 600px;height: 400px;"></div>
+</body>
+<script>
+    let map;
+    function init(){
+        map=new google.maps.Map(document.getElementById("map"),{
+            center:{lat:23, lng:121},
+            zoom:8
+        });
+        // 設定路徑
+        let server = new google.maps.DirectionsService();
+        server.route({
+            origin:"台灣大學",
+            destination:"市政府捷運站",
+            travelMode:google.maps.TravelMode.TRANSIT
+        },function(result){
+            // console.log(result);
+            new google.maps.DirectionsRenderer({
+                map:map,
+                directions:result
+            })
+        })
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_vDx_BY89S_Im6FfhUmATf85MQOETe5c&callback=init"></script>
+</html>

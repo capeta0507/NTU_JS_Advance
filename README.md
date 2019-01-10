@@ -8,3 +8,6 @@
 ### 20190105 Google Map 基本引用練習
 >[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190105)
 >[筆記](https://hackmd.io/xLnM2X4nTICvs37wt4oWLQ)
+### 20190109 Google Map 進階引用練習
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190109)
+>[筆記](https://hackmd.io/wJ62jbyrTC2N9eX0-CpBAg)

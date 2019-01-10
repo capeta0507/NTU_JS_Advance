@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Maps Geocoding</title>
+</head>
+<body>
+    <h3>Google Maps</h3>
+    <div id="map" style="width: 600px;height: 400px;"></div>
+</body>
+<script>
+    let map;
+    let geocoder;
+    function init(){
+        map=new google.maps.Map(document.getElementById("map"),{
+            center:{lat:23, lng:121},
+            zoom:8
+        });
+        geocoder = new google.maps.Geocoder();
+        getData();
+    }
+    function getData(){ 
+        let url="https://training.pada-x.com/resources/javascript-advanced/taipei-lottery.out"
+        fetch(url).then(function(response){
+            return response.json();
+        }).then(function(data){
+            showData(data)
+        });
+     }
+     function showData(data){
+        for(var x=0;x<data.length;x++){
+            showMaker(data[x]);
+        }
+     }
+     function showMaker(site){
+        //  console.log(site.name,site.addr);
+         geocoder.geocode({
+             address:site.addr
+         },function(results,status){
+            let position = results[0].geometry.location;
+            let marker = new google.maps.Marker({
+                map:map,
+                position:position
+            });
+            // 建立 InfoWindow
+            let win = new google.maps.InfoWindow({
+                content:site.name.bold()+"<br/>"+site.addr
+            });
+            // 點及標示，展示 InfoWindow
+            marker.addListener("click",function(){
+                win.open(map,marker);
+            })
+            // 調整地圖中心點
+            map.setCenter(position);
+        });
+     }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_vDx_BY89S_Im6FfhUmATf85MQOETe5c&callback=init"></script>
+</html>

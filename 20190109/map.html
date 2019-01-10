@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Maps</title>
+</head>
+<body>
+    <h3>Google Maps</h3>
+    <button onclick="go()">Go</button>
+    <div id="map" style="width: 600px;height: 400px;"></div>
+</body>
+<script>
+    let map;
+    function go(){
+        map.setCenter({lat:25, lng:121.5});
+    }
+    function init(){
+        map=new google.maps.Map(document.getElementById("map"),{
+            center:{lat:23, lng:121},
+            zoom:8
+        });
+        // 在地圖物件上做click的事件處理
+        map.addListener("click",function(e){
+            new google.maps.Marker({
+                // 在使用者點擊的位置產生一個標示
+                map:map,
+                position:e.latLng
+            });
+        })
+        // 畫一個標示
+        let marker = new google.maps.Marker({
+            map:map,
+            concent:"Hello",
+            position:{lat:23,lng:121}
+        })
+        marker.addListener("click",function(){
+            new google.maps.InfoWindow({
+                content:"Hello <u>Map</u>",
+                map:map,
+                position:{lat:23, lng:121},
+            })
+            win.open(map,marker);
+        });
+        // 劃一個資訊視窗
+        // new google.maps.InfoWindow({
+        //     content:"Hello <u>Map</u>",
+        //     map:map,
+        //     position:{lat:23, lng:121},
+        // })
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_vDx_BY89S_Im6FfhUmATf85MQOETe5c&callback=init"></script>
+</html>
