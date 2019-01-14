@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Facebook Login</title>
+</head>
+<script>
+// 3. 登入狀態改變時，做出對應的處理
+function statusChangeCallback(response) {
+    let welcome = document.getElementById("welcome");
+    let main = document.getElementById("main");
+    welcome.style.display="none";
+    main.style.display="none";
+    if (response.status === 'connected') { //使用者已登入
+        main.style.display="block";
+        testAPI(); //抓取使用者的資料
+    } else { //使用者未登入，鼓勵使用者登入
+        welcome.style.display="block";
+    }
+}
+function testAPI() {
+    FB.api('/me?fields=id,name,email,gender,birthday', function(response) {
+        console.log(response);
+    });
+}
+function login(){
+    FB.login(function(response){
+        statusChangeCallback(response);
+    }, {scope:"email,user_gender"});
+}
+// 2. 載入完成後，呼叫 window.fbAsyncInit 函式
+window.fbAsyncInit = function() {
+    // 初始化 Facebook SDK 套件
+    FB.init({
+        appId      : '239202716972045',
+        cookie     : true,  // enable cookies to allow the server to access 
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.8' // use graph api version 2.8
+    });
+    // 偵測使用者的登入狀態
+    FB.getLoginStatus(function(response) {
+        console.log(response);
+        statusChangeCallback(response);
+    });
+
+};
+// 1. 載入 Facebook JavaScript SDK
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<body>
+    <h3>Facebook Login</h3>
+    <div id="welcome" style="display: none;">
+        <button onclick="login()">Login</button>
+    </div>
+    <div id="main" style="display: none;">
+        Hello
+    </div>
+</body>
+</html>
