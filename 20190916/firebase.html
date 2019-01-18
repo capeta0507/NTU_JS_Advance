@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Firebase</title>
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        let config = {
+            apiKey: "AIzaSyD-OI9FQHzKqyEsq0_4sILcqLLrpgUK2B4",
+            authDomain: "fb-project-a45d3.firebaseapp.com",
+            databaseURL: "https://fb-project-a45d3.firebaseio.com",
+            projectId: "fb-project-a45d3"
+        };
+        firebase.initializeApp(config); //初始化應用程式
+        let db = firebase.database(); //建立與資料庫的連線
+            
+        function read(){
+            let ref = db.ref("/data"); 
+            ref.once("value",function(snapshot){
+                let data=snapshot.val();
+                console.log(data)
+            })
+        }
+        function save(){
+            let name = document.getElementById("name").value;
+            let content = document.getElementById("content").value;
+            let time = (new Date()).getTime(); // 取得當前時間
+            // 放進資料庫
+            let ref = db.ref("/messages/");
+            ref.push({
+                name:name,
+                content:content,
+                time:time
+            },function(error){
+                if(error){
+                    alert("error");
+                }else{
+                    alert("OK");
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1>Hello Firebase</h1>
+    Name：<input type="text" id="name"/>
+    <br>
+    <br>
+    Contene：<textarea id="content"></textarea>
+    <br>
+    <br>
+    <button onclick="save();">Save</button>
+    <button onclick="read();">Read</button>
+</body>
+</html>
