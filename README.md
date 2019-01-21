@@ -11,3 +11,12 @@
 ### 20190109 Google Map 進階引用練習
 >[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190109)
 >[筆記](https://hackmd.io/wJ62jbyrTC2N9eX0-CpBAg)
+### 20190112 Facebook 開發者簡介
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190112)
+>[筆記](https://hackmd.io/Vty9PXesQd-rhIE3hqdUkA)
+### 20190116 Facebook 開發者簡介 進階
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190116)
+>[筆記](https://hackmd.io/zdOS4h8VSviIMbvELJLCzg)
+### 20190119 Facebook 開發者簡介
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190119)
+>[筆記](https://hackmd.io/EwwVWvDJS2eghWrb3QuxNQ)
