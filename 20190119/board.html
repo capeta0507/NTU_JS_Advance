@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message Board</title>
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    let config = {
+        apiKey: "AIzaSyD-OI9FQHzKqyEsq0_4sILcqLLrpgUK2B4",
+        authDomain: "fb-project-a45d3.firebaseapp.com",
+        databaseURL: "https://fb-project-a45d3.firebaseio.com",
+        projectId: "fb-project-a45d3",
+        storageBucket: "fb-project-a45d3.appspot.com",
+        messagingSenderId: "1082829604818"
+    };
+    firebase.initializeApp(config);
+    let auth = firebase.auth();
+    let provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('user_birthday');
+    // 當使用者的登入狀態變化的時候，執行我們提供的函式
+    let currentUser = null;
+    auth.onAuthStateChanged(function (user) {
+        let member = document.getElementById("member");
+        let welcome = document.getElementById("welcome");
+        member.style.display = "none";
+        welcome.style.display = "none";
+        if (user) { //使用者已登入
+            console.log(user);
+            currentUser = user;
+            member.style.display = "block";
+        } else { //使用者已經登出
+            console.log(user);
+            currentUser = user;
+            welcome.style.display = "block";
+        }
+    });
+    function signIn() {
+        auth.signInWithPopup(provider).then(function (result) {
+
+        }).catch(function (error) {
+
+        });
+    }
+    let db = firebase.database();
+    function post() {
+        let id = currentUser.uid;
+        let name = currentUser.displayName;
+        let content = document.getElementById("content").value;
+        // 加入資料庫
+        let ref = db.ref("/messages");
+        ref.push({
+            id: id, name: name, content: content, time: Date.now()
+        }, function (error) {
+            if (error) {
+                alert(error);
+            } else {
+                document.getElementById("content").value = "";
+                read();
+            }
+        });
+    }
+    function read() {
+        let ref = db.ref("/messages");
+        ref.once("value", function (snapshots) {
+            let data = [];
+            snapshots.forEach(function (snapshot) {
+                let message = snapshot.val();
+                message.key = snapshot.key;
+                data.push(message);
+            });
+            show(data);
+
+        });
+    }
+    function show(data) {
+        let list = document.getElementById("list");
+        list.innerHTML = "";
+        let message;
+        for (let i = 0; i < data.length; i++) {
+            message = data[i];
+            if (currentUser === null) { //未登入狀態
+                list.innerHTML = message.name.bold() + " " + message.content + "<hr/>" +
+                    list.innerHTML;
+            } else { //登入狀態
+                if (currentUser.uid === message.id) { //和留言的作者是同一個人
+                    list.innerHTML = message.name.bold() + " " + message.content +
+                        "<button onclick='del(\"" + message.key + "\");'>Delete</button>" +
+                        "<hr/>" + list.innerHTML;
+                } else { //不同一個人
+                    list.innerHTML = message.name.bold() + " " + message.content + "<hr/>" +
+                        list.innerHTML;
+                }
+            }
+
+        }
+    }
+    function del(key) {
+        let ref = db.ref("/messages/" + key);
+        ref.remove(function (error) {
+            if (error) {
+                alert(error);
+            } else {
+                alert("Removed");
+                read();
+            }
+        })
+    }
+    // 網頁載入完成後，做一些處理
+    window.addEventListener("load", function () {
+        read();
+    });
+</script>
+
+<body>
+    <h3>Message Board</h3>
+    <div id="welcome" style="display: none;">
+        <button onclick="signIn();">Sign In</button>
+    </div>
+    <div id="member" style="display: none;">
+        <textarea id="content"></textarea>
+        <button onclick="post();">Post</button>
+    </div>
+    <hr />
+    <div id="list">Message List</div>
+</body>
+
+</html>
