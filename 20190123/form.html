@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form Validation</title>
+</head>
+<style>
+    /* input:invalid{
+        border-color: red;
+    }
+    input:valid{
+        border-color: aqua;
+    } */
+    .ok{
+        color: rgb(0, 47, 255);
+        display: none;
+    }
+    input:valid+ .ok{
+        display: inline;
+    }
+</style>
+
+<body>
+    <h3>Form Validation</h3>
+    <form action="https://www.google.com/">
+        帳號：<input type="text" required pattern="[a-zA-Z0-9]{6,}" oninvalid="this.setCustomValidity('六位數英數字');" oninput="this.setCustomValidity('')" />
+        <span class="ok">V</span>
+        <br />
+        E-mail：<input type="email" value="goo@gmail.com" required />
+        <span class="ok">V</span>
+        <br />
+        <select required>
+            <option value="">性別</option>
+            <option value="male">男</option>
+            <option value="female">女</option>
+        </select>
+        <br />
+        <input type="submit" value="Send">
+    </form>
+</body>
+
+</html>

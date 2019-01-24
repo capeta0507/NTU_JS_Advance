@@ -17,6 +17,9 @@
 ### 20190116 Facebook 開發者簡介 進階
 >[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190116)
 >[筆記](https://hackmd.io/zdOS4h8VSviIMbvELJLCzg)
-### 20190119 Facebook 開發者簡介
+### 20190119 Facebook 簡易的會員系統
 >[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190119)
 >[筆記](https://hackmd.io/EwwVWvDJS2eghWrb3QuxNQ)
+### 20190123 HTML5 CSS3 簡介
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190123)
+>[筆記](https://hackmd.io/4LXk9VBWQLqVw8uj9mHQxg)

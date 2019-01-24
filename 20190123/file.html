@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Process File</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <h3>Process File</h3>
+    <input type="file" onchange="selectFile(this);" />
+</body>
+<script>
+    function selectFile(input) {
+        // 取得檔案的基本資料
+        let file = input.files[0]; //取得使用者選擇的檔案，回傳檔案物件
+        // if (file.size > 10 * 1024) { // 檔案大小超過10KB
+        //     alert("檔案過大");
+        // }
+        console.log(file);
+        // 使用 FileReader 來讀取檔案的內容
+        let render = new FileReader();
+        render.addEventListener("load", function () {
+            let content = JSON.parse(this.result);
+            console.log(content);
+            console.log(content.data);
+        })
+        render.readAsArrayBuffer(file);
+    }
+</script>
+
+</html>

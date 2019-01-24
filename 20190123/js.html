@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test HTML5 CSS3</title>
+</head>
+<style>
+    .box {
+        margin: 30px;
+        width: 100px;
+        height: 100px;
+        /* background-color: aqua; */
+        border-radius: 10%;
+        opacity: 0.5;
+        box-shadow: 0px 0px 10px black;
+        background: linear-gradient(to left, #dddddd 0%, #000000 100%);
+        transform: rotate(-45deg) skew(15deg, 15deg);
+        transition: all .5s;
+    }
+
+    .box:hover {
+        opacity: 1;
+    }
+
+    .box+.ok {
+        color: green;
+        display: none;
+
+    }
+
+    .box:hover+.ok {
+        display: inline;
+    }
+</style>
+
+<body>
+    <div class="box"></div>
+    <span class="ok">OK</span>
+</body>
+
+</html>
