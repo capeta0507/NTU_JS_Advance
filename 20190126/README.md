@@ -37,3 +37,7 @@
 2. 縮放：scale(x, y)
 3. 旋轉：rotate(angle)
 4. 任意變化：transform(a, b, c, d, e, f)
+#### 使用路徑功能
+1. 呼叫 beginPath() 開始建立路徑
+2. 呼叫各種定義路徑的方法完成形狀設計
+3. 呼叫 closePath() 關閉路徑；或者直接呼叫 fill() 或 stroke() 進行繪圖同時關閉路徑
