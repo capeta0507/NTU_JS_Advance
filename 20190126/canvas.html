@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+</head>
+<script>
+    let cvs,ctx;
+    let cvsUI,ctxUI;
+    window.addEventListener("load",function(){
+        // 取得核心的畫布
+        cvs=document.getElementById("cvs"); 
+        ctx=cvs.getContext("2d"); 
+        // 取得使用者介面用的畫布
+        cvsUI=document.getElementById("cvs-ui");
+        ctxUI=cvsUI.getContext("2d");
+        // 事件註冊在使用者介面的畫布上
+        cvsUI.addEventListener("mousedown",drag);
+        
+    });
+    function drag(e /*事件物件*/){
+        // 滑鼠按住的時候，你想做的事情
+        let start={
+            x:e.clientX-cvs.offsetLeft, 
+            y:e.clientY-cvs.offsetTop
+        };        
+        let move=function(e){
+            // 滑鼠移動的時候，你想做的事情
+            let point={
+                x:e.clientX-cvs.offsetLeft, 
+                y:e.clientY-cvs.offsetTop
+            }
+            // 清空畫面
+            ctxUI.clearRect(0,0,cvsUI.width,cvsUI.height);
+            // 畫線
+            ctxUI.beginPath();
+            ctxUI.moveTo(start.x,start.y);
+            ctxUI.lineTo(point.x,point.y);
+            ctxUI.closePath();
+            ctxUI.stroke();
+        }
+        let end=function(){
+            // 滑鼠放開的時候，你想做的事情
+            ctx.drawImage(cvsUI,0,0,cvs.width,cvs.height);
+            ctxUI.clearRect(0,0,cvsUI.width,cvsUI.height);
+            // 拖曳結束後，移除拖曳相關的事件處理
+            document.removeEventListener("mousemove",move);
+            document.removeEventListener("mouseup",end);
+        }
+        document.addEventListener("mousemove",move);
+        document.addEventListener("mouseup",end);
+    }
+    function loadImage(src){
+        // 把圖檔畫進去
+        let img=new Image(); //相當於<img/>
+        img.src=src;
+        img.addEventListener("load",function(){
+            // 確認圖檔載入完成後，才畫進去
+            cvsUI.width=cvs.width=img.width;
+            cvsUI.height=cvs.height=img.height;
+            ctx.drawImage(img,0,0,cvs.width,cvs.height);
+            // draw();
+        })
+    }
+    function selectFile(input){
+        let file=input.files[0];
+        let src=URL.createObjectURL(file);
+        console.log(src)
+        loadImage(src);
+    }
+    /*
+    function draw(){
+        // 填滿
+        ctx.fillStyle="#ff0000";
+        ctx.fillRect(100,100,50,50); 
+        ctx.fillStyle="black";
+        ctx.font="30px arial" // 和css font 的設定一樣
+        ctx.fillText("Hello",200,100);
+        // 描邊
+        ctx.strokeStyle="blue";
+        ctx.strokeRect(400,300,50,50);
+        // 繪製路徑：定義路徑 => 繪製
+        ctx.beginPath();
+        ctx.moveTo(500,10); // 移動當前的追蹤點
+        ctx.lineTo(400,100);
+        ctx.lineTo(300,50);
+        ctx.fill(); // 繪製：fill(), stroke()
+        //  圓形
+        ctx.beginPath();
+        //  arc(圓心x,圓心y,起始角度,結束角度)
+        ctx.arc(100,400,50,0,Math.PI*2); 
+        ctx.fill();
+        // 曲線
+        ctx.beginPath();
+        ctx.moveTo(50,350);
+        ctx.quadraticCurveTo(250,10,300,300); //二次曲線
+        ctx.stroke();
+    }
+    */
+</script>
+<body>
+    <h3>Canvas</h3>
+    <input type="file" onchange="selectFile(this);">
+    <br/>
+    <canvas id="cvs" width="600" height="450" style="position: absolute">
+
+    </canvas>
+    <canvas id="cvs-ui" width="600" height="450" style="position: absolute"></canvas>
+</body>
+</html>

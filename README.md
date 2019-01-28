@@ -23,3 +23,6 @@
 ### 20190123 HTML5 CSS3 簡介
 >[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190123)
 >[筆記](https://hackmd.io/4LXk9VBWQLqVw8uj9mHQxg)
+### 20190123 Canvas 向量繪圖
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190126)
+>[筆記](https://hackmd.io/ZCEw_ugHSsW_ceq2c-hM1Q)
