@@ -26,3 +26,6 @@
 ### 20190123 Canvas 向量繪圖
 >[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190126)
 >[筆記](https://hackmd.io/ZCEw_ugHSsW_ceq2c-hM1Q)
+### 20190130 網頁動畫製作 網路字型 Web Font
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190130)
+>[筆記](https://hackmd.io/1Ho2Q6-iR_K7eobqSIoOOg?both)
