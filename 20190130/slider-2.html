@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slider</title>
+</head>
+<style>
+    body{
+        margin: 0px;
+    }
+    header{
+        width: 80%;
+        height: 800px;
+        position: relative;
+        overflow: hidden;
+    }
+    header>.slide{
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        position: absolute;
+        left: 100%;
+        top: 0px;
+    }
+    header>.slide:first-child{
+        left: 0;
+
+    }
+    header>.in{
+        animation: slide-in 1s;
+        animation-fill-mode: forwards;
+    }
+    header>.out{
+        animation: slide-out 1s;
+        animation-fill-mode: forwards;
+    }
+    @keyframes slide-in{
+        0%{
+            left: 100%;
+        }
+        100%{
+            left: 0px;
+        }
+    }
+    @keyframes slide-out{
+        0%{
+            left: 0px;
+        }
+        100%{
+            left:-100%;
+        }
+    }
+</style>
+
+<body>
+    <h3>slider</h3>
+    <header onclick="next()">
+        <div class="slide" style="background-image: url(./images/1519732606237.jpg)"></div>
+        <div class="slide" style="background-image: url(./images/1519732126365.jpg)"></div>
+        <div class="slide" style="background-image: url(./images/1519732266132.jpg)"></div>
+    </header>
+</body>
+<script>
+    let slides=document.getElementsByClassName("slide");
+    let index=0;
+    function next(){
+        // 把目前的主圖移出去
+        slides[index].classList.remove("in");
+        slides[index].classList.add("out");
+        // 下一張
+        index=(index+1)%slides.length;
+        // 把新的主圖移進來
+        slides[index].classList.add("in");
+        slides[index].classList.remove("out");
+    }
+</script>
+</html>

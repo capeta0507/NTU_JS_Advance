@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Effect</title>
+</head>
+<style>
+    .box{
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        /* transition: margin-left 0.5s; */
+    }
+</style>
+<!-- <script>
+    let box;
+    // 確定HTML DOM Ready 之後執行程式
+    window.addEventListener("DOMContentLoading",function(){
+        box=document.getElementById("box");
+    });
+
+</script> -->
+<body>
+    <h3>Effect</h3>
+    <div id="box" class="box"></div>
+    <button onclick="start();">Move</button>
+</body>
+<script>
+    let box=document.getElementById("box");
+    left=0;
+    function start(){
+        effectId=window.setInterval(move,10); // 以0.01秒執行一次 move
+    }
+    function move(){
+        left++;
+        box.style.marginLeft=left+"px";
+        if(left>=500){ // 滿足終止條件，停止時間排程
+            window.clearInterval(effectId);
+        }
+    }
+</script>
+</html>
