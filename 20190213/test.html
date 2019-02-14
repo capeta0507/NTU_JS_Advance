@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Worker</title>
+</head>
+<script>
+    function go(){
+        let loading=document.getElementById("loading");
+        loading.textContent="Loading...";
+        let startTime=Date.now();
+        // 統整一下
+        let result=0; // 紀錄最後結果
+        let loaded=0; //紀錄有幾個worker回來了
+        let worker1 = new Worker("job.js");
+        // 啟動第一個worker
+        worker1.postMessage("start");
+        // 第一個worker回報
+        worker1.addEventListener("message",function(e){
+            result=result+e.data;
+            loaded++;
+            if(loaded===2){
+                console.log(result,Date.now()-startTime);
+                loading.textContent="";
+            }
+        })
+        let worker2 = new Worker("job.js");
+        // 啟動第二個worker
+        worker2.postMessage("start");
+        // 第二個worker回報
+        worker2.addEventListener("message",function(e){
+            result=result+e.data;
+            loaded++;
+            if(loaded===2){
+                console.log(result,Date.now()-startTime);
+                loading.textContent="";
+            }
+        })
+        
+    }
+</script>
+    
+<body>
+    <h3>Test Heavy Tasks</h3>
+    <button onclick="go();">Go</button>
+    <div id="loading"></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video Player</title>
+</head>
+<script>
+    let video;
+    window.addEventListener("DOMContentLoaded",function(){
+        video=document.getElementById("myvideo");
+        video.addEventListener("timeupdate",function(){
+            let timeline=document.getElementById("timeline");
+            // 將播放時間變成百分比
+            let percentage=Math.floor(100 * video.currentTime/video.duration);
+            console.log(100 * video.currentTime/video.duration)
+            let progress = document.getElementById("progress");
+            // timeline.textContent = percentage + "%";
+            progress.style.width = percentage + "%";
+        });
+        window.document.addEventListener("pointerdown",function(e){
+            console.log(e);
+        })
+    });
+    function play(){
+        video.play();
+    }
+    function pause(){
+        video.pause();
+    }
+    function replay(){
+        video.currentTime=0;
+        video.play();
+    }
+</script>
+<body>
+    <h3>Video Player</h3>
+    <video id="myvideo" src="./video/movie.mp4"></video>
+    <div id="timeline" style="width: 500px;height:20px;border: 1px solid red;">
+        <div id="progress" style="height:20px;background: red;"></div>
+    </div>
+    <br>
+    <button onclick="play();">play</button>
+    <button onclick="pause();">pause</button>
+    <button onclick="replay();">replay</button>
+    
+</body>
+
+</html>

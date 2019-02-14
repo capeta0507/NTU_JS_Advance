@@ -29,3 +29,6 @@
 ### 20190130 網頁動畫製作 網路字型 Web Font
 >[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190130)
 >[筆記](https://hackmd.io/1Ho2Q6-iR_K7eobqSIoOOg?both)
+### 20190213 影音播放控制
+>[我的練習(GitHub)](https://github.com/capeta0507/NTU_JS_Advance/tree/master/20190213)
+>[筆記](https://hackmd.io/WDjeUxE4RiKGMKBFNuy_Eg)
